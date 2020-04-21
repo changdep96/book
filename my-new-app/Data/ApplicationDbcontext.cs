@@ -11,6 +11,8 @@ namespace my_new_app.Data
         }
         public DbSet<CommentList> CommentLists{get;set;}
         public DbSet<Book> books{get;set;}
+        public DbSet<Author> authors{get;set;}
+        public DbSet<Genre> genres{get;set;}
     }
     
 }
