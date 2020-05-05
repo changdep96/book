@@ -6,8 +6,8 @@ namespace my_new_app.Models
     public class Genre
     {
         [Key]
-        public int id{get;set;}
+        public int GenreId{get;set;}
         public string name{get;set;}
-         public ICollection<Book> Book{get;set;}
+         public ICollection<Book> book{get;set;}
     }
 }

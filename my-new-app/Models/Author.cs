@@ -6,7 +6,7 @@ namespace my_new_app.Models
     public class Author
     {
         [Key]
-        public int id{get;set;}
+        public int AuthorId{get;set;}
         public string Name{get;set;}
         public string Email{get;set;}
         public bool gender{get;set;}

@@ -10,6 +10,9 @@ margin: 30px auto;
   padding: 20px;	
   box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
+.close{
+  display: none;
+}
 .table-title {
   padding-bottom: 10px;
   margin: 0 0 10px;
@@ -41,4 +44,18 @@ table.table th i {
   font-size: 13px;
   margin: 0 5px;
   cursor: pointer;
+}
+.EditAuthor{
+  float: left;
+    margin-right: 5px;
+}
+.MuiPaper-root{
+  text-align: right !important;
+}
+.btn-success{
+  text-align: center;
+
+}
+.gender{
+  margin: 20px;
 }
