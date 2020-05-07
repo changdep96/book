@@ -10,8 +10,8 @@ using my_new_app.Data;
 namespace my_new_app.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200503142645_inital")]
-    partial class inital
+    [Migration("20200507064610_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

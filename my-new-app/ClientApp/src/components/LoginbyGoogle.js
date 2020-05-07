@@ -3,6 +3,7 @@ import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom'
 
+
 class LoginbyGoogle extends Component {
     constructor(props) {
         super(props);
@@ -12,29 +13,33 @@ class LoginbyGoogle extends Component {
         
     }
     signup(res){
-        const googlrespose={
-            Name:res.profileObj.name,
-            email:res.profileObj.email,
-            token:res.googleId,
+        const googleRespose={
+            FullName:res.profileObj.name,
+            Email:res.profileObj.email,
+    
+            id_token:res.tokenId,
+            access_token:res.accessToken,
             Image:res.profileObj.imageUrl,
             ProviderId:'google'
         };
         debugger;
-        axios.post('http://localhost:60200/Api/Login/SocialmediaData',googlrespose)
-        .then((resualt)=>{
-            let resjson =resualt;
-            sessionStorage.setItem('userData', JSON.stringify(resualt))
-       this.props.history.push('/UserDashboad')
+        axios.post('https://localhost:5001/api/login/google',googleRespose)
+        .then((resual)=>{
+            let resjson =resual;
+            sessionStorage.setItem('userData', JSON.stringify(resual))
+            this.setState({googleRespose})
+       
         });
     }
     
     render() {
         const responseGoogle=(response)=>{
             console.log(response);
-            var res=response.profileObj;
+            var res= response.profileObj;
             console.log(res);
-            debugger;
-            this.signup(response);
+            this.signup(response)
+            
+            
         }
         return (
             <div className="App">
@@ -61,7 +66,11 @@ class LoginbyGoogle extends Component {
          
                             onSuccess={responseGoogle}
   
-                            onFailure={responseGoogle} ></GoogleLogin>
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                            isSignedIn={true}
+                            
+                            ></GoogleLogin>
            
                         </div>
         

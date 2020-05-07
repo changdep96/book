@@ -15,6 +15,7 @@ namespace my_new_app.Models
         [MaxLength(20)]
         public string Address { get; set; }
         public ICollection<Book> books{get;set;}
+       
 
     }
     public class Role : IdentityRole<int>
@@ -32,6 +33,12 @@ namespace my_new_app.Models
         [ForeignKey("UserId")]
         public virtual ApplicationsUser User { get; set; }
     }
+     public class UserLogin:IdentityUserLogin<int>
+     {
+          [ForeignKey("UserId")]
+          public virtual ApplicationsUser User{get;set;}
+        
+     }
 
     /* user and role stores */
     public class ApplicationUserStore : UserStore<ApplicationsUser, Role, ApplicationDbContext, int, IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>, IdentityUserToken<int>, IdentityRoleClaim<int>>

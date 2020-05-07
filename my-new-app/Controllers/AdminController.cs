@@ -1,19 +1,31 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
 using my_new_app.Data;
 using my_new_app.Models;
 
 namespace my_new_app.Controllers
 {
-    [Route("api/Admin/Account")]
+    [EnableCors("MyPolicy")]
+    [Route("api/login/admin")]
     [ApiController]
     public class AdminController : Controller
     {
         ApplicationDbContext dbContext;
         UserManager<ApplicationsUser> userManager;
         RoleManager<Role> roleManager;
+        
+       
 
         public AdminController(ApplicationDbContext dbContext,
             UserManager<ApplicationsUser> userManager, RoleManager<Role> roleManager)
@@ -22,8 +34,8 @@ namespace my_new_app.Controllers
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
-[HttpPost]
-        public async Task<IActionResult> Init()
+        [HttpPost]
+    public async Task<IActionResult> Init()
         {
             if (!await dbContext.Users.AnyAsync())
             {
@@ -52,5 +64,12 @@ namespace my_new_app.Controllers
             }
             return Content("Exists");
         }
-    }
+  
+ 
+     
+ 
+
+      
+
+}
 }

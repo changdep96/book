@@ -19,11 +19,12 @@ using Microsoft.Extensions.Primitives;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace my_new_app
 {
     public class Startup
-    {
+    {readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -124,9 +125,27 @@ namespace my_new_app
                     };
 
                 });
-
-            services.AddCors();
-
+services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = GoogleDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+            .AddGoogle(options =>
+            {
+                options.ClientId = "[945688556250-ksjktjeqjib4p0so169o35abfmdsjpc2.apps.googleusercontent.com]";
+                options.ClientSecret = "[ynljByvz_R9Mzpt365JMh7pX]";
+                
+            });
+services.AddCors(options =>
+        {
+            options.AddPolicy("Policy1",
+                builder =>
+                {
+                    builder.WithOrigins("https://localhost:5001/api/login/google"
+                                        );
+                });
+        
+        });
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
@@ -150,19 +169,12 @@ namespace my_new_app
                 app.UseHsts();
             }
 
-            app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:3000")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials()
-            );
+             
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
 
 
             app.UseRouting();
+             app.UseCors();
           
             app.UseAuthorization();
           app.UseAuthentication();
