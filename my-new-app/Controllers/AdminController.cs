@@ -49,7 +49,8 @@ namespace my_new_app.Controllers
                 {
                     UserName = "changdep",
                     Email = "changdep@gmail.com",
-                    FullName = "Administrator"
+                    FullName = "Administrator",
+                    
                 };
 
                 var result = await userManager.CreateAsync(user, "chang@123");

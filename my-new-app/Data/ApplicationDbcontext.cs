@@ -45,6 +45,8 @@ namespace my_new_app.Data
         public DbSet<Book> books{get;set;}
         public DbSet<Author> authors{get;set;}
         public DbSet<Genre> genres{get;set;}
+        public DbSet<ApplicationsUser> users{get;set;}
+       // public DbSet<IdentityUserLogin> userLogins{get;set;}
    
     }
 }

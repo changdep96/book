@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom'
-
+import GoogleDrive from './attacthgoogledrive'
 
 class LoginbyGoogle extends Component {
     constructor(props) {
@@ -16,15 +16,17 @@ class LoginbyGoogle extends Component {
         const googleRespose={
             FullName:res.profileObj.name,
             Email:res.profileObj.email,
-    
-            id_token:res.tokenId,
-            access_token:res.accessToken,
-            Image:res.profileObj.imageUrl,
-            ProviderId:'google'
+           
+          id_token:res.tokenId,
+           access_token:res.accessToken,
+           Image:res.profileObj.imageUrl,
+         ProviderId:'google'
         };
         debugger;
-        axios.post('https://localhost:5001/api/login/google',googleRespose)
+        this.setState({googleRespose});
+        axios.post('/api/user/google',googleRespose)
         .then((resual)=>{
+            alert("lỗi");
             let resjson =resual;
             sessionStorage.setItem('userData', JSON.stringify(resual))
             this.setState({googleRespose})
@@ -71,6 +73,9 @@ class LoginbyGoogle extends Component {
                             isSignedIn={true}
                             
                             ></GoogleLogin>
+
+                            
+<GoogleDrive cookiePolicy={'single_host_origin'}/>
            
                         </div>
         

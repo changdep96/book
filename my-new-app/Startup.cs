@@ -136,16 +136,8 @@ services.AddAuthentication(options =>
                 options.ClientSecret = "[ynljByvz_R9Mzpt365JMh7pX]";
                 
             });
-services.AddCors(options =>
-        {
-            options.AddPolicy("Policy1",
-                builder =>
-                {
-                    builder.WithOrigins("https://localhost:5001/api/login/google"
-                                        );
-                });
-        
-        });
+services.AddCors();
+       
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory

@@ -11,10 +11,11 @@ using my_new_app.Data;
 using my_new_app.Models;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace my_new_app.Controllers
 {
-    [Route("api/login/google")]
+ [Route("api/user/google")]
     [ApiController]
     public class userController : Controller
     {
@@ -28,10 +29,14 @@ namespace my_new_app.Controllers
             this.userManager = userManager;
 
         }
-       
+     
+        
         [HttpPost]
         public async Task<IActionResult> FindOrCreat(  [FromBody] ApplicationsUser model)
         {
+             Content("đã vào");
+             Console.Write("đa vào");
+             
              var found= await userManager.FindByEmailAsync(model.Email);
              var found1 =await userManager.FindByNameAsync(model.UserName);
            if (found==null)
